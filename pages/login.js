@@ -6,12 +6,14 @@ import { auth } from "../firebase/config";
 import { useAuth } from "../context/AuthUserContext";
 import { Box } from "@mui/system";
 import { Button } from "../components/Button";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const [mynumber, setnumber] = useState("");
   const [otp, setotp] = useState("");
   const [show, setshow] = useState(false);
   const [final, setfinal] = useState("");
+  const { push } = useRouter();
 
   const { signInPhone, authUser } = useAuth();
 
@@ -33,11 +35,8 @@ const Login = () => {
       },
       auth
     );
-    console.log(mynumber, "mynumber");
-    console.log(verify, "verify");
     signInPhone(mynumber, verify)
       .then((res) => {
-        console.log("fdx", res);
         setshow(true);
         setfinal(res);
       })
@@ -53,7 +52,7 @@ const Login = () => {
       .confirm(otp)
       .then((result) => {
         // success
-        console.log("otp verified");
+        push("/menu");
       })
       .catch((err) => {
         alert("Wrong code");
