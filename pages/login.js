@@ -21,7 +21,7 @@ const Login = () => {
 				size: 'normal',
 				callback: (response) => {
 					// reCAPTCHA solved, allow signInWithPhoneNumber.
-					// ...
+					// .../
 				},
 				'expired-callback': () => {
 					// Response expired. Ask user to solve reCAPTCHA again.
@@ -57,66 +57,83 @@ const Login = () => {
 	};
 
 	return (
-		<div style={{ marginTop: '200px' }}>
-			<center>
-				<div style={{ display: !show ? 'block' : 'none' }}>
-					<input
-						value={mynumber}
-						onChange={(e) => {
-							setnumber(e.target.value);
-						}}
-						placeholder='phone number'
-					/>
-					<br />
-					<br />
-					<div id='recaptcha-container'></div>
-					<button onClick={signin}>Send OTP</button>
-				</div>
-				<div style={{ display: show ? 'block' : 'none' }}>
-					<input
-						type='text'
-						placeholder={'Enter your OTP'}
-						onChange={(e) => {
-							setotp(e.target.value);
-						}}
-					></input>
-					<br />
-					<br />
-					<button onClick={ValidateOtp}>Verify</button>
-				</div>
-			</center>
-		</div>
-		// <div
-		// 	sx={{
-		// 		height: '100%',
-		// 		display: 'flex',
-		// 		alignItems: 'center',
-		// 		justifyContent: 'center',
-		// 	}}
-		// >
-		// 	<Card
-		// 		sx={{
-		// 			margin: '25px',
-		// 			width: '400px',
-		// 			height: '300px',
-		// 			padding: '25px',
-		// 			display: 'flex',
-		// 			justifyContent: 'center',
-		// 			'flex-direction': 'column',
-		// 		}}
-		// 	>
-		// 		<h1>Hi, There</h1>
-		// 		<TextField
-		// 			id='filled-basic'
-		// 			label='Your Phone Number'
-		// 			variant='filled'
-		// 		/>
-
-		// 		<Button sx={{ marginTop: '20px' }} variant='contained'>
-		// 			Login
-		// 		</Button>
-		// 	</Card>
+		// <div style={{ marginTop: '200px' }}>
+		// 	<center>
+		// 		<div style={{ display: !show ? 'block' : 'none' }}>
+		// 			<input
+		// 				value={mynumber}
+		// 				onChange={(e) => {
+		// 					setnumber(e.target.value);
+		// 				}}
+		// 				placeholder='phone number'
+		// 			/>
+		// 			<br />
+		// 			<br />
+		// 			<div id='recaptcha-container'></div>
+		// 			<button onClick={signin}>Send OTP</button>
+		// 		</div>
+		// 		<div style={{ display: show ? 'block' : 'none' }}>
+		// 			<input
+		// 				type='text'
+		// 				placeholder={'Enter your OTP'}
+		// 				onChange={(e) => {
+		// 					setotp(e.target.value);
+		// 				}}
+		// 			></input>
+		// 			<br />
+		// 			<br />
+		// 			<button onClick={ValidateOtp}>Verify</button>
+		// 		</div>
+		// 	</center>
 		// </div>
+		<div
+			sx={{
+				height: '100%',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'center',
+			}}
+		>
+			<Card
+				sx={{
+					margin: '25px',
+					width: '400px',
+					height: '400px',
+					padding: '25px',
+					display: 'flex',
+					justifyContent: 'center',
+					'flex-direction': 'column',
+				}}
+			>
+				<h1>Hi, There</h1>
+				<TextField
+					id='filled-basic'
+					label='Your Phone Number'
+					variant='filled'
+					value={mynumber}
+					onChange={(e) => {
+						setnumber(e.target.value);
+					}}
+				/>
+				<TextField
+					sx={{ marginTop: '15px' }}
+					id='filled-basic'
+					label='Enter OTP'
+					variant='filled'
+					value={otp}
+					onChange={(e) => {
+						setnumber(e.target.value);
+					}}
+				/>
+
+				<Button sx={{ marginTop: '20px' }} variant='contained'>
+					Send OTP
+				</Button>
+				<Button sx={{ marginTop: '20px' }} variant='contained'>
+					Verify OTP
+				</Button>
+			</Card>
+		</div>
 	);
 };
 
