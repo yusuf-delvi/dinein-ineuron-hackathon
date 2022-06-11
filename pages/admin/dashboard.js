@@ -4,18 +4,21 @@ import styles from "../../styles/Restaurant.module.css";
 import Chip from "@mui/material/Chip";
 import { useActiveOrders } from "../../hooks/orders";
 import { useTables } from "../../hooks/tables";
+import Button from '@mui/material/Button';
 
-const Table = ({}) => {
+const Table = ({ table }) => {
   return (
     <div className={styles.main}>
-    <Card className={styles.table}>
-      <span>Table #1 </span>
-      <Chip label="Booked" />
-    </Card>
+      <Card className={styles.table}>
+        <span>Table - #{table.id}</span>
+        <span>Capacity - {table.capacity}</span>
+        <Chip label={table.isOccupied ? "Occupied" : "Free"} />
+        <Button variant="contained">LogOut</Button>
+      </Card>
     </div>
-   
   );
 };
+
 
 export const Restaurant = () => {
   const {
@@ -43,28 +46,20 @@ export const Restaurant = () => {
       <h1>Restaurant</h1>
       <div>
       <h2>Tables</h2>
-      <pre>
-        <code>{JSON.stringify(activeTables, null, 2)}</code>
-      </pre>
       <div className={styles.main}>
-        <Table />
-        <Table />
-        <Table />
-        <Table />
-       
+        {!activeTablesLoading &&
+          activeTables.map((table) => <Table key={table.id} table={table} />)}
       </div>
       </div>
       <div>
-      <h2>Orders</h2>
+     
 
       </div>
       
       
       <div>
-        <h2>Active Orders</h2>
-        <pre>
-          <code>{JSON.stringify(activeOrders, null, 2)}</code>
-        </pre>
+        <h2>Order History</h2>
+          
       </div>
     </div>
   );

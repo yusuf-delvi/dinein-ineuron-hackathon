@@ -31,7 +31,7 @@ export function useTables(
   const updatedTables = data?.map((table) => {
     return {
       ...table,
-      isOccupied: activeTables.includes(table.id),
+      isOccupied: activeTables?.includes(table.id),
     };
   });
 
