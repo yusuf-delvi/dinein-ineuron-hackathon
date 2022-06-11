@@ -22,6 +22,16 @@ const dummyActiveOrders = [
   },
 ];
 
+const dummyOrderHistory = [
+  {
+    id: "1",
+    tableId: "1",
+    userId: "1",
+    items: [],
+    orderTotal: "$0.00",
+  },
+];
+
 async function getActiveOrders() {
   return fetch("/api/orders/active")
     .then((res) => res.json())

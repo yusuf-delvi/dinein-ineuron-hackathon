@@ -5,15 +5,14 @@ import Chip from "@mui/material/Chip";
 import { useActiveOrders } from "../../hooks/orders";
 import { useTables } from "../../hooks/tables";
 
-const Table = () => {
+const Table = ({ table }) => {
   return (
     <div className={styles.main}>
-    <Card className={styles.table}>
-      <span>Table Name</span>
-      <Chip label="Booked" />
-    </Card>
+      <Card className={styles.table}>
+        <span>#{table.id}</span>
+        <Chip label={table.isOccupied ? "Occupied" : "Free"} />
+      </Card>
     </div>
-   
   );
 };
 
@@ -42,10 +41,8 @@ const Restaurant = () => {
     <div>
       <h1>Restaurant</h1>
       <div className={styles.main}>
-        <Table />
-        <Table />
-        <Table />
-        <Table />
+        {!activeTablesLoading &&
+          activeTables.map((table) => <Table key={table.id} table={table} />)}
       </div>
       <h2>Active Tables</h2>
       <pre>
