@@ -39,11 +39,13 @@ const Restaurant = () => {
   return (
     <div>
       <h1>Restaurant</h1>
+      <h2>Tables</h2>
       <div className={styles.main}>
         <Table />
         <Table />
         <Table />
         <Table />
+        <h2>Orders</h2>
       </div>
     </div>
   );
