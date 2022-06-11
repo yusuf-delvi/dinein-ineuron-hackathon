@@ -24,6 +24,7 @@ export function useTables(
       .then((data) => {
 
         const activeTables = activeOrders?.map((order) => order.tableId);
+        console.log("activeTables", activeTables);
         const updatedTables = data?.tables?.map((table) => {
           return {
             ...table,
