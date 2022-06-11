@@ -1,7 +1,18 @@
-import { useState, useEffect } from "react";
-import { useActiveOrders } from "../../hooks/orders";
-import { useTables } from "../../hooks/tables";
-export default function Dashboard() {
+import React from "react";
+import Card from "@mui/material/Card";
+import styles from "../../styles/Restaurant.module.css";
+import Chip from "@mui/material/Chip";
+
+const Table = () => {
+  return (
+    <Card sx={{}}>
+      <span>Table Name</span>
+      <Chip label="Booked" />
+    </Card>
+  );
+};
+
+const Restaurant = () => {
   const {
     data: activeOrders,
     loading: activeOrderLoading,
@@ -20,14 +31,17 @@ export default function Dashboard() {
 
   console.log("activeOrders", activeOrders);
 
-  return (
-    <div>
-      <h1>Dashboard</h1>
-      <h2>Active Orders:</h2>
-      <div>{JSON.stringify(activeOrders)}</div>
+   return (
+     <div>
+       <h1>Restaurant</h1>
+       <div className={styles.main}>
+         <Table />
+         <Table />
+         <Table />
+         <Table />
+       </div>
+     </div>
+   );
+};
 
-      <h2>Tables</h2>
-      <div>{JSON.stringify(tables)}</div>
-    </div>
-  );
-}
+export default Restaurant;
