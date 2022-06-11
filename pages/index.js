@@ -20,5 +20,10 @@ export default function Home({}) {
     }
   }, []);
 
-  return <div>Selected table: {table}</div>;
+  return <div>
+    <div>
+      <img src="/logo.svg" width={300} />
+    </div>
+
+  </div>;
 }
