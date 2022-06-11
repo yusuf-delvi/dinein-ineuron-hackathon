@@ -1,7 +1,6 @@
 // restuarant user cart hook
 
 import { useLocalStorageState } from "ahooks";
-import { useEffect } from "react";
 import { useTableNumber } from "./tables";
 // import { doc, onSnapshot } from "firebase/firestore";
 // import { firestore } from "../firebase/config";
