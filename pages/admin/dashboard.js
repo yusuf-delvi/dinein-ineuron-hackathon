@@ -2,16 +2,18 @@ import React from "react";
 import Card from "@mui/material/Card";
 import styles from "../../styles/Restaurant.module.css";
 import Chip from "@mui/material/Chip";
-
 import { useActiveOrders } from "../../hooks/orders";
 import { useTables } from "../../hooks/tables";
 
 const Table = () => {
   return (
-    <Card sx={{}}>
+    <div className={styles.main}>
+    <Card className={styles.table}>
       <span>Table Name</span>
       <Chip label="Booked" />
     </Card>
+    </div>
+   
   );
 };
 
