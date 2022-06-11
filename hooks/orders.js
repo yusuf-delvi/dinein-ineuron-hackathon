@@ -1,45 +1,68 @@
 import { useRequest } from "ahooks";
-
-const dummyActiveOrders = [
-  {
-    id: "1",
-    tableId: "1",
-    userId: "1",
-    items: [
-      {
-        id: 1,
-        name: "Pizza",
-        description:
-          "A pizza is a flatbread typically topped with tomato sauce and cheese and baked in an oven.",
-        price: "$10.99",
-        image:
-          "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60",
-        category: "Pizza",
-        tags: ["Pizza", "Cheese", "Tomato Sauce"],
-        isVeg: true,
-      },
-    ],
-  },
-];
-
-const dummyOrderHistory = [
-  {
-    id: "1",
-    tableId: "1",
-    userId: "1",
-    items: [],
-    orderTotal: "$0.00",
-  },
-];
+import { useRouter } from "next/router";
+import { activeOrders, orderHistory } from "../dummy_data";
+import { useCart } from "./cart";
 
 async function getActiveOrders() {
-  return fetch("/api/orders/active")
-    .then((res) => res.json())
-    .then((res) => {
-      return res.orders?.length ? res.orders : dummyActiveOrders;
-    });
+  return activeOrders;
+}
+
+async function checkoutOrder(orderId) {
+  const order = activeOrders.find((order) => order.id === orderId);
+  if (order) {
+    // delete order from activeOrders
+    activeOrders.splice(activeOrders.indexOf(order), 1);
+  }
+  // add order to order history
+  orderHistory.push(order);
+}
+
+async function getOrderHistory() {
+  return orderHistory;
+}
+
+async function placeOrder(items) {
+  const order = {
+    id: activeOrders.length + 1,
+    items,
+  };
+  activeOrders.push(order);
+  return order;
+}
+
+export function useCheckoutOrder(orderId) {
+  const { run, loading, data } = useRequest(() => checkoutOrder(orderId));
+  return { run, loading, data };
 }
 
 export function useActiveOrders() {
   return useRequest(getActiveOrders);
+}
+
+export function useOrderHistory() {
+  return useRequest(getOrderHistory);
+}
+
+export function usePlaceOrder() {
+  const { cartItems, clearCart } = useCart();
+  const { push } = useRouter();
+
+  const { run, loading, data, error } = useRequest(
+    () => {
+      return placeOrder(cartItems).then((order) => {
+        clearCart();
+        push(`/orders/${order.id}`);
+
+        return order;
+      });
+    },
+    { manual: true }
+  );
+
+  return {
+    placeOrder: run,
+    loading,
+    data,
+    error,
+  };
 }

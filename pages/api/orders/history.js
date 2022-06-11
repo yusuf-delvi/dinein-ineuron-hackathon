@@ -11,13 +11,19 @@ import {
 	getDocs,
 } from '@firebase/firestore';
 
-export default async function hello(req, res) {
-	const { userid } = req.query;
+export default async function getOldOrders(req, res) {
+	const { userId } = req.query;
 
 	// add query for userid.
-	const activeOrdersSnapshot = await getDocs(
+	let activeOrdersSnapshot = await getDocs(
 		collection(firestore, 'activeOrders')
 	);
+
+	if (userId) {
+		activeOrdersSnapshot = await getDocs(
+			collection(firestore, 'activeOrders').where('userId', '==', userId)
+		);
+	}
 
 	const orders = [];
 
@@ -25,5 +31,5 @@ export default async function hello(req, res) {
 		orders.push({ _id: doc.id, ...doc.data() });
 	});
 
-	res.status(200).json({ orders });
+	return res.status(200).json({ orders });
 }

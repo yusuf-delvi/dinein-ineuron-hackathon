@@ -1,4 +1,5 @@
 import { useRequest } from "ahooks";
+import { menuItems } from "../dummy_data";
 
 async function getMenuItems() {
   return menuItems;

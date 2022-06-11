@@ -1,16 +1,4 @@
-import { useRequest } from "ahooks";
-import { useEffect, useState } from "react";
-
-const dummyTables = [
-  {
-    id: "1",
-    capacity: "Table 1",
-  },
-  {
-    id: "2",
-    capacity: "Table 2",
-  },
-];
+import { useLocalStorageState, useRequest } from "ahooks";
 
 async function getTables() {
   return fetch("/api/tables")
@@ -40,4 +28,12 @@ export function useTables(
     error,
     loading,
   };
+}
+
+export function useTableNumber() {
+  const [tableNumber, setTableNumber] = useLocalStorageState("tableNumber", {
+    defaultValue: "",
+  });
+
+  return [tableNumber, setTableNumber];
 }

@@ -1,24 +1,19 @@
-import Head from 'next/head';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { useLocalStorageState } from "ahooks";
+import { useTableNumber } from "../hooks/tables";
 
 export default function Home({}) {
   const {
     query: { table },
     push,
   } = useRouter();
-  const [_, setTable] = useLocalStorageState({
-    table: "",
-  });
-
+  const [_, setTableNumber] = useTableNumber();
   useEffect(() => {
-    if (!table) {
-      push("/");
-    } else {
-      setTable(table);
+    if (table) {
+      setTableNumber(table);
+      push("/login");
     }
-  }, []);
+  }, [table]);
 
   return <div>
     <div>
