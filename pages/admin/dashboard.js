@@ -11,7 +11,7 @@ import { borderRadius } from "@mui/system";
 const Table = ({ table }) => {
   return (
     <Box sx={{
-      width: '400px',
+      width: '600px',
       height: '100%',
       display: 'flex',
       flexDirection: 'row',
@@ -38,6 +38,8 @@ const Table = ({ table }) => {
         padding: '15px 10px',
         
       }}>
+        <h5>Order Details</h5>
+        <span>Ordered Items - Chicken</span>
         <span>Capacity - {table.capacity}</span>
         <Chip sx={{
           marginTop: "10px",
