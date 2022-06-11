@@ -34,7 +34,12 @@ const VegNonVegMark = ({ isVeg } = { isVeg: true }) => {
   );
 };
 
-const MenuItem = ({ menu, onAddClick = () => null }) => {
+const MenuItem = ({
+  menu,
+  onAddClick = () => null,
+  onRemoveClick = () => null,
+}) => {
+  const { cartItems } = useCart();
   return (
     <Card
       elevation={0}
@@ -80,15 +85,54 @@ const MenuItem = ({ menu, onAddClick = () => null }) => {
               justifySelf: "flex-end",
             }}
           >
-            <Button
-              size="small"
-              sx={{
-                fontSize: "12px",
-              }}
-              onClick={onAddClick}
-            >
-              Add
-            </Button>
+            {cartItems[menu.id] ? (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <Button
+                  size="small"
+                  sx={{
+                    fontSize: "12px",
+                    minWidth: "35px",
+                    width: "35px",
+                  }}
+                  onClick={onRemoveClick}
+                >
+                  -
+                </Button>
+
+                <Box width={25} textAlign="center">
+                  <Typography variant="subtitle1" color="GrayText">
+                    {cartItems[menu.id].quantity}
+                  </Typography>
+                </Box>
+                <Button
+                  size="small"
+                  sx={{
+                    fontSize: "12px",
+                    minWidth: "35px",
+                    width: "35px",
+                  }}
+                  onClick={onAddClick}
+                >
+                  +
+                </Button>
+              </Box>
+            ) : (
+              <Button
+                size="small"
+                sx={{
+                  fontSize: "12px",
+                }}
+                onClick={onAddClick}
+              >
+                Add
+              </Button>
+            )}
           </Box>
         </Box>
       </Box>
@@ -97,7 +141,7 @@ const MenuItem = ({ menu, onAddClick = () => null }) => {
 };
 
 const MenuList = () => {
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart } = useCart();
   const {
     data: menuItems,
     loading: menuItemsLoading,
@@ -121,7 +165,11 @@ const MenuList = () => {
   return (
     <Box>
       {menuItems.map((menu) => (
-        <MenuItem menu={menu} onAddClick={() => addToCart(menu)} />
+        <MenuItem
+          menu={menu}
+          onAddClick={() => addToCart(menu)}
+          onRemoveClick={removeFromCart}
+        />
       ))}
       <Button
         variant="contained"
@@ -134,12 +182,6 @@ const MenuList = () => {
   );
 };
 
-export function getStaticProps() {
-  return {
-    props: {
-      menuItems: menuItems,
-    },
-  };
-}
+
 
 export default MenuList;
