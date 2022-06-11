@@ -1,21 +1,8 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from 'next/head';
+import styles from '../styles/Home.module.css';
 
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>QR Restaurants</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+	const [phoneNumber, setPhoneNumber] = useState('');
 
-      <main className={styles.main}>
-       
-      </main>
-
-      <footer className={styles.footer}>
-       
-      </footer>
-    </div>
-  )
+	return <div>hhi</div>;
 }
