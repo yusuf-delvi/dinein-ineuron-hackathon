@@ -55,7 +55,11 @@ const Login = () => {
           }}
         />
 
-        <Button sx={{ marginTop: "20px" }} variant="contained">
+        <Button
+          sx={{ marginTop: "20px" }}
+          variant="contained"
+          onSubmit={handleLogin}
+        >
           Login
         </Button>
       </Card>

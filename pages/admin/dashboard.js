@@ -2,7 +2,8 @@ import React from "react";
 import Card from "@mui/material/Card";
 import styles from "../../styles/Restaurant.module.css";
 import Chip from "@mui/material/Chip";
-import { useActiveOrders } from "../../hooks/useActiveOrders";
+import { useActiveOrders } from "../../hooks/orders";
+import { useTables } from "../../hooks/tables";
 
 const Table = () => {
   return (
@@ -32,17 +33,17 @@ const Restaurant = () => {
 
   console.log("activeOrders", activeOrders);
 
-   return (
-     <div>
-       <h1>Restaurant</h1>
-       <div className={styles.main}>
-         <Table />
-         <Table />
-         <Table />
-         <Table />
-       </div>
-     </div>
-   );
+  return (
+    <div>
+      <h1>Restaurant</h1>
+      <div className={styles.main}>
+        <Table />
+        <Table />
+        <Table />
+        <Table />
+      </div>
+    </div>
+  );
 };
 
 export default Restaurant;
