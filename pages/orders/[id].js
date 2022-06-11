@@ -39,7 +39,7 @@ export default function OrderStatusById() {
         justifyContent: 'center',
         borderRadius: '10px',
       }}>
-          <h2>Order <Chip label={`#${id}`}></Chip>  Placed</h2>
+          <h2>Order Placed</h2>
           <h5><Chip 
           sx={{
             backgroundColor: '#22272b',
