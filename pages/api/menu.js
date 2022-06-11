@@ -9,7 +9,7 @@ import {
 	limit,
 	addDoc,
 	getDocs,
-} from '@firebase/firestore';
+} from 'firebase/firestore';
 
 export default async function getMenu(req, res) {
 	const querySnapshot = await getDocs(collection(firestore, 'dishes'));
