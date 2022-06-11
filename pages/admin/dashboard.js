@@ -5,11 +5,11 @@ import Chip from "@mui/material/Chip";
 import { useActiveOrders } from "../../hooks/orders";
 import { useTables } from "../../hooks/tables";
 
-const Table = () => {
+const Table = ({}) => {
   return (
     <div className={styles.main}>
     <Card className={styles.table}>
-      <span>Table Name</span>
+      <span>Table #1 </span>
       <Chip label="Booked" />
     </Card>
     </div>
@@ -17,7 +17,7 @@ const Table = () => {
   );
 };
 
-const Restaurant = () => {
+export const Restaurant = () => {
   const {
     data: activeOrders,
     loading: activeOrderLoading,
@@ -41,18 +41,25 @@ const Restaurant = () => {
   return (
     <div>
       <h1>Restaurant</h1>
+      <div>
       <h2>Tables</h2>
+      <pre>
+        <code>{JSON.stringify(activeTables, null, 2)}</code>
+      </pre>
       <div className={styles.main}>
         <Table />
         <Table />
         <Table />
         <Table />
-        <h2>Orders</h2>
+       
       </div>
-      <h2>Active Tables</h2>
-      <pre>
-        <code>{JSON.stringify(activeTables, null, 2)}</code>
-      </pre>
+      </div>
+      <div>
+      <h2>Orders</h2>
+
+      </div>
+      
+      
       <div>
         <h2>Active Orders</h2>
         <pre>
