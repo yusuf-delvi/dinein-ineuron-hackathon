@@ -1,8 +1,9 @@
 import { useRequest } from "ahooks";
-import { menuItems } from "../dummy_data";
 
 async function getMenuItems() {
-  return menuItems;
+  return fetch("/api/menu")
+    .then((r) => r.json())
+    .then((d) => d.dishes);
 }
 
 export function useMenuItems() {
