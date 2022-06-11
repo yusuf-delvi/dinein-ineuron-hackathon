@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
-import Chip from "@mui/material/Chip";
 import { menuItems } from "../dummy_data";
 import { useCart } from "../hooks/cart";
 import { usePlaceOrder } from "../hooks/orders";
 import { Loader } from "../components/Loader";
 import { Box, Typography } from "@mui/material";
 import { Button } from "../components/Button";
+import { useMenuItems } from "../hooks/menu";
 
 const VegNonVegMark = ({ isVeg } = { isVeg: true }) => {
   return (
@@ -19,7 +19,7 @@ const VegNonVegMark = ({ isVeg } = { isVeg: true }) => {
         alignItems: "center",
         width: "15px",
         height: "15px",
-        marginTop: "10px",
+        marginTop: "15px",
       }}
     >
       <Box
@@ -34,7 +34,7 @@ const VegNonVegMark = ({ isVeg } = { isVeg: true }) => {
   );
 };
 
-const MenuItem = ({ menu }) => {
+const MenuItem = ({ menu, onAddClick = () => null }) => {
   return (
     <Card
       elevation={0}
@@ -48,18 +48,11 @@ const MenuItem = ({ menu }) => {
         }}
       >
         <Box width={110} height={110}>
-          <img
-            src={
-              menu.imageUrl ||
-              "https://unsplash.com/photos/rAyCBQTH7ws/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mnx8Zm9vZHxlbnwwfDJ8fHwxNjU0OTQ3Mzky&force=true&w=640"
-            }
-            width={"100%"}
-            height={"100%"}
-          />
+          <img src={menu.image} width={"100%"} height={"100%"} />
         </Box>
         <Box
           sx={{
-            padding: "20px",
+            padding: "10px",
             display: "flex",
             flex: 1,
             justifyContent: "space-between",
@@ -74,10 +67,10 @@ const MenuItem = ({ menu }) => {
               fontSize="16px"
               fontWeight={"bold"}
             >
-              Pizza
+              {menu.name}
             </Typography>
             <Typography fontSize={"12px"} color="GrayText">
-              Prep: 20 mins
+              ₹ <strong>{menu.price}</strong>
             </Typography>
 
             <VegNonVegMark isVeg={true} />
@@ -92,6 +85,7 @@ const MenuItem = ({ menu }) => {
               sx={{
                 fontSize: "12px",
               }}
+              onClick={onAddClick}
             >
               Add
             </Button>
@@ -102,8 +96,13 @@ const MenuItem = ({ menu }) => {
   );
 };
 
-const MenuList = ({ menuItems }) => {
+const MenuList = () => {
   const { addToCart } = useCart();
+  const {
+    data: menuItems,
+    loading: menuItemsLoading,
+    error: menuItemsError,
+  } = useMenuItems();
   const {
     placeOrder,
     loading: placingOrder,
@@ -115,14 +114,14 @@ const MenuList = ({ menuItems }) => {
       alert("Order placed");
     }
   }, [orderPlaced]);
-  if (placingOrder) {
+  if (placingOrder || menuItemsLoading) {
     return <Loader />;
   }
 
   return (
     <Box>
       {menuItems.map((menu) => (
-        <MenuItem menu={menu} />
+        <MenuItem menu={menu} onAddClick={() => addToCart(menu)} />
       ))}
       <Button
         variant="contained"
