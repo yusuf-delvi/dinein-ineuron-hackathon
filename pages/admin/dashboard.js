@@ -22,7 +22,11 @@ const Restaurant = () => {
     error: activeOrdersError,
   } = useActiveOrders();
 
-  const [tables] = useTables({ activeOrders });
+  const {
+    data: activeTables,
+    loading: activeTablesLoading,
+    error: activeTablesError,
+  } = useTables({ activeOrders });
 
   if (activeOrderLoading) {
     return <div>Loading...</div>;
@@ -32,8 +36,6 @@ const Restaurant = () => {
     return <div>Error</div>;
   }
 
-  console.log("activeOrders", activeOrders);
-
   return (
     <div>
       <h1>Restaurant</h1>
@@ -42,6 +44,16 @@ const Restaurant = () => {
         <Table />
         <Table />
         <Table />
+      </div>
+      <h2>Active Tables</h2>
+      <pre>
+        <code>{JSON.stringify(activeTables, null, 2)}</code>
+      </pre>
+      <div>
+        <h2>Active Orders</h2>
+        <pre>
+          <code>{JSON.stringify(activeOrders, null, 2)}</code>
+        </pre>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import { useRequest } from "ahooks";
 import { useEffect, useState } from "react";
 
 const dummyTables = [
@@ -11,29 +12,32 @@ const dummyTables = [
   },
 ];
 
+async function getTables() {
+  return fetch("/api/tables")
+    .then((res) => res.json())
+    .then((data) => data.tables);
+}
+
 export function useTables(
   { activeOrders } = {
     activeOrders: [],
   }
 ) {
-  const [tables, setTables] = useState(([] = dummyTables));
+  const { data, error, loading } = useRequest(getTables);
 
-  useEffect(() => {
-    fetch("/api/tables")
-      .then((res) => res.json())
-      .then((data) => {
+  console.log("tables", data, error, loading);
 
-        const activeTables = activeOrders?.map((order) => order.tableId);
-        const updatedTables = data?.tables?.map((table) => {
-          return {
-            ...table,
-            isOccupied: activeTables.includes(table.id),
-          };
-        });
+  const activeTables = activeOrders?.map((order) => order.tableId);
+  const updatedTables = data?.map((table) => {
+    return {
+      ...table,
+      isOccupied: activeTables.includes(table.id),
+    };
+  });
 
-        setTables(updatedTables);
-      });
-  }, []);
-
-  return [tables];
+  return {
+    data: updatedTables,
+    error,
+    loading,
+  };
 }
