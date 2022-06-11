@@ -7,10 +7,13 @@ import { useTables } from "../../hooks/tables";
 
 const Table = () => {
   return (
+    <div className={styles.main}>
     <Card className={styles.table}>
       <span>Table Name</span>
       <Chip label="Booked" />
     </Card>
+    </div>
+   
   );
 };
 
