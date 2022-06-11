@@ -5,10 +5,16 @@ body {
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
 		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+html, body {
+	height: 100vh;
+	color: "#22272b";
+}
 #__next {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100%;
 }
 a {
 	color: inherit;
