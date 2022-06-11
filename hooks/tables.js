@@ -22,9 +22,9 @@ export function useTables(
     fetch("/api/tables")
       .then((res) => res.json())
       .then((data) => {
+
         const activeTables = activeOrders?.map((order) => order.tableId);
-        console.log("activeTables", activeTables);
-        const updatedTables = data?.map((table) => {
+        const updatedTables = data?.tables?.map((table) => {
           return {
             ...table,
             isOccupied: activeTables.includes(table.id),
