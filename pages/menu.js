@@ -1,44 +1,81 @@
-import React from 'react';
-import Card from '@mui/material/Card';
-import Chip from '@mui/material/Chip';
-import styles from '../styles/Menu.module.css';
-import Button from '@mui/material/Button';
+import React, { useEffect } from "react";
+import Card from "@mui/material/Card";
+import Chip from "@mui/material/Chip";
+import styles from "../styles/Menu.module.css";
+import Button from "@mui/material/Button";
+import { menuItems } from "../dummy_data";
+import { useCart } from "../hooks/cart";
+import { usePlaceOrder } from "../hooks/orders";
 
-const MenuItem = () => {
-	return <div sx={{ marginTop: '30px' }} >
-		<Card className={styles.menuItemContainer}>
-			<div className={styles.menuItemsimg}>
-			<img src='/pizza.jpg'>
-			</img>
-			</div>
-			
-			<div className={styles.menuItemsmain}>
-				<h1>
-					Cheese Pizza
-				</h1>
-				<div className={styles.menuItemssub}>
-					<h3 >$10.00</h3>
-					<Chip sx={{marginLeft:"20px"}} label="Vegan"></Chip>
-				</div>
-			</div>
+// Material UI component to display the menu
+const Menu = ({ menuItems }) => {
+  const { addToCart } = useCart();
+  const {
+    placeOrder,
+    loading: placingOrder,
+    error: placeOrderError,
+    data: orderPlaced,
+  } = usePlaceOrder();
 
-			<div className={styles.menuItemBtnContainer}>
-			<Button variant="contained">Add to Cart</Button>
-			</div>
+  useEffect(() => {
+    if (orderPlaced) {
+      alert("Order placed");
+    }
+  }, [orderPlaced]);
 
-		</Card>
-	</div>;
+  if (placingOrder) {
+    return <div>Placing order...</div>;
+  }
+  if (placeOrderError) {
+    return <div>Error placing order: {placeOrderError}</div>;
+  }
+
+  return (
+    <div className={styles.menu}>
+      {menuItems.map((item) => (
+        <Card key={item.id} className={styles.menuItem}>
+          <div className={styles.menuItemName}>{item.name}</div>
+          <div className={styles.menuItemDescription}>{item.description}</div>
+          <div className={styles.menuItemPrice}>{item.price}</div>
+          <div className={styles.menuItemTags}>
+            {item.tags.map((tag) => (
+              <Chip key={tag} label={tag} className={styles.menuItemTag} />
+            ))}
+          </div>
+          <div className={styles.menuItemIsVeg}>
+            {item.isVeg ? "Veg" : "Non-Veg"}
+          </div>
+          <div className={styles.menuItemActions}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => addToCart(item)}
+            >
+              Add to Cart
+            </Button>
+          </div>
+        </Card>
+      ))}
+
+      {/* place order button */}
+
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => placeOrder()}
+      >
+        Place Order
+      </Button>
+    </div>
+  );
 };
 
-const Menu = () => {
-	return (
-		<div className={styles.menuContainer}>
-			<div>Explore Our Menu</div>
-			<MenuItem />
-			<MenuItem />
-			<MenuItem />
-		</div>
-	);
-};
+export function getStaticProps() {
+  return {
+    props: {
+      menuItems: menuItems,
+    },
+  };
+}
 
 export default Menu;
