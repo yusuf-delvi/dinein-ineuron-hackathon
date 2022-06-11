@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
-import {useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { Button } from "../../components/Button";
-import {Box} from "@mui/material/"
+import { Box } from "@mui/material/"
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
