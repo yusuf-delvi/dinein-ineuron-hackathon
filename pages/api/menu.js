@@ -16,7 +16,7 @@ export default async function getMenu(req, res) {
 	const dishes = [];
 
 	querySnapshot.forEach((doc) => {
-		dishes.push({ id: doc.id, ...doc.data() });
+		dishes.push({ ...doc.data(), id: doc.id });
 	});
 
 	res.status(200).json({ dishes });
