@@ -14,7 +14,7 @@ export default function Home({}) {
 
   useEffect(() => {
     if (!table) {
-      push("/scanqr");
+      push("/");
     } else {
       setTable(table);
     }
