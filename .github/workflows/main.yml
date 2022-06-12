@@ -12,8 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@master   
-      - name: Build images
-        run: |
-          ls
-          make build-production
-          make start-production
+      - name: Build app
+        run: make build-production
+      - name: Start app
+        run: make start-production
