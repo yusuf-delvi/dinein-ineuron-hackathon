@@ -22,7 +22,6 @@ export default function OrderStatusById() {
       alignItems: 'center',
       backgroundColor:'ebf5ee',
       width: '100%',
-      height: '100%',
       // justifyContent: 'center',
     }}>
       <h1>Order Status</h1>
@@ -50,7 +49,6 @@ export default function OrderStatusById() {
       <h2>Explore More Items</h2>
       <Box sx={{
           width:'80%',
-          minWidth: '380px',
         }}>
         <MenuList />
       </Box>

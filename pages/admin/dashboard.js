@@ -15,7 +15,7 @@ const Table = ({ table }) => {
       height: '100%',
       display: 'flex',
       flexDirection: 'row',
-      flexWrap:'wrap !important',
+      flexWrap: 'wrap !important',
       margin: '20px',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
       padding: '20px 10px',
@@ -25,19 +25,19 @@ const Table = ({ table }) => {
         padding: '20px 10px',
         margin: '15px',
         color: '#fff',
-        display:'flex',
+        display: 'flex',
         alignItems: 'center',
-        borderRadius:'10px',
-        
+        borderRadius: '10px',
+
       }}>
         #{table.id}
       </Box>
 
       <Box sx={{
-        display:'flex',
+        display: 'flex',
         flexDirection: 'column',
         padding: '15px 10px',
-        
+
       }}>
         <h5>Order Details</h5>
         <span>Ordered Items - Chicken</span>
@@ -94,7 +94,7 @@ export const Restaurant = () => {
 
   return (
     <Box sx={{
-      height:'100vh',
+      height: '100vh',
     }}>
       <Box sx={{
         backgroundColor: "#fcd469",
@@ -114,13 +114,13 @@ export const Restaurant = () => {
         <h2>Tables</h2>
         {/* <div className={styles.main}> */}
         <Box sx={{
-          
-          display:'flex !important',
-          flexWrap:'wrap !important'
+
+          display: 'flex !important',
+          flexWrap: 'wrap !important'
         }}>
 
           {!activeTablesLoading &&
-            activeTables.map((table) => <Table key={table.id} table={table} items={[]}/>)}
+            activeTables.map((table) => <Table key={table.id} table={table} items={[]} />)}
         </Box>
       </Box>
 
@@ -132,12 +132,35 @@ export const Restaurant = () => {
       }}>
         <div>
           <h2>Order History</h2>
-          <Card>
-            Order 1
-          </Card>
-          <Card>
-            Order 2
-          </Card>
+          <Box sx={{
+            display:'flex',
+            flexDirection:'row',
+            flexWrap:'wrap'
+          }}>
+            <Card sx={{
+              margin:'20px',
+              width:'300px',
+              backgroundColor:'#22272b',
+              color:'#fff',
+              padding:'20px 40px',
+              flexDirection:'column'
+            }}>
+              <span>Order #1</span><br></br>
+              <span>Items - Chicken</span>
+            </Card>
+            <Card sx={{
+              margin:'20px',
+              width:'300px',
+              backgroundColor:'#22272b',
+              color:'#fff',
+              padding:'20px 40px',
+              flexDirection:'column'
+            }}>
+              <span>Order #1</span><br></br>
+              <span>Items - Chicken</span>
+            </Card>
+          </Box>
+
         </div>
       </Box>
 
