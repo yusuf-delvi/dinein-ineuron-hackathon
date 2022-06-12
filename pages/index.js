@@ -25,39 +25,39 @@ export default function Home({}) {
 
   return (
     <Box
-    sx={{
-      display: "flex",
-      justifyContent: "center",
-      flexDirection: "column",
-      alignItems: "center",
-      height: "100%",
-    }}
-  >
-    <img src="/logo.png" width={300} />
-    <Box
       sx={{
-        marginTop: "75px",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "100%",
       }}
     >
-      <img
-        width={300}
-        height={200}
-        src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
-      />
-    </Box>
-    <Box
-      sx={{
-        marginTop: "75px",
-      }}
-    >
-      <Button
-        onClick={() => {
-          push("/login");
+      <img src="/Logo.png" width={300} />
+      <Box
+        sx={{
+          marginTop: "75px",
         }}
       >
-        Let's Go
-      </Button>
+        <img
+          width={300}
+          height={200}
+          src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+        />
+      </Box>
+      <Box
+        sx={{
+          marginTop: "75px",
+        }}
+      >
+        <Button
+          onClick={() => {
+            push("/login");
+          }}
+        >
+          Let's Go
+        </Button>
+      </Box>
     </Box>
-  </Box>
   );
 }
