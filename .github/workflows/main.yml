@@ -9,17 +9,10 @@ on:
 jobs:
   build:
     runs-on: self-hosted
-    defaults:
-      run:
-        working-directory: ./server
-    strategy:
-      matrix:
-        node-version: [14.x]
 
     steps:
       - uses: actions/checkout@master   
       - name: Build images
-        working-directory: /actions-runner/_work/dinein-ineuron-hackathon/dinein-ineuron-hackathon
         run: |
           ls
           make build-production
