@@ -1,6 +1,7 @@
 import React from 'react';
 import { QrReader } from 'react-qr-reader';
 import { Box } from '@mui/material'
+import { useRouter} from 'next/router'
 const Scanqr = () => {
 	return (
 		<div>
@@ -16,6 +17,7 @@ const Scanqr = () => {
 				constraints={{facingMode: "environment"}}
 				onResult={(result, error) => {
 					if (!!result) {
+						console.log(result)
 						setData(result?.text);
 					}
 
