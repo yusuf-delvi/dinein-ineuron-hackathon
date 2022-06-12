@@ -11,10 +11,11 @@ import { borderRadius } from "@mui/system";
 const Table = ({ table }) => {
   return (
     <Box sx={{
-      width: '600px',
+      width: '300px',
       height: '100%',
       display: 'flex',
       flexDirection: 'row',
+      flexWrap:'wrap !important',
       margin: '20px',
       boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.1)',
       padding: '20px 10px',
@@ -92,7 +93,9 @@ export const Restaurant = () => {
   }
 
   return (
-    <div>
+    <Box sx={{
+      height:'100vh',
+    }}>
       <Box sx={{
         backgroundColor: "#fcd469",
         padding: "10px 35px",
@@ -102,16 +105,23 @@ export const Restaurant = () => {
       }}>
         <h1>Restaurant</h1>
       </Box>
+
       <Box sx={{
         margin: '20px',
         borderRadius: '20px',
         color: "#22272b",
       }}>
         <h2>Tables</h2>
-        <div className={styles.main}>
+        {/* <div className={styles.main}> */}
+        <Box sx={{
+          
+          display:'flex !important',
+          flexWrap:'wrap !important'
+        }}>
+
           {!activeTablesLoading &&
             activeTables.map((table) => <Table key={table.id} table={table} items={[]}/>)}
-        </div>
+        </Box>
       </Box>
 
 
@@ -122,12 +132,17 @@ export const Restaurant = () => {
       }}>
         <div>
           <h2>Order History</h2>
-
+          <Card>
+            Order 1
+          </Card>
+          <Card>
+            Order 2
+          </Card>
         </div>
       </Box>
 
 
-    </div>
+    </Box>
   );
 };
 
