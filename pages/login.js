@@ -69,7 +69,7 @@ const Login = () => {
         flexDirection: "column",
       }}
     >
-      <img src="/logo.svg" width={300} />
+      <img src="/logo.png" width={300} />
 
       <Card
         sx={{

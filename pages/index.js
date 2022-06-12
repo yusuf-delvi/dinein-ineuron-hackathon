@@ -33,7 +33,7 @@ export default function Home({}) {
       height: "100%",
     }}
   >
-    <img src="/logo.svg" width={300} />
+    <img src="/logo.png" width={300} />
     <Box
       sx={{
         marginTop: "75px",
