@@ -1,25 +1,19 @@
-# This is a basic workflow to help you get started with Actions
+name: DineIn start
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches: [main]
+  pull_request:
+    branches: [main]
 
 jobs:
-  docker:
+  build:
     runs-on: self-hosted
+
     steps:
-      -
-        name: Build prod
+      - uses: actions/checkout@master   
+      - name: Build images
         run: |
-            make build-production
-      -
-        name: Start prod
-        run: |
-            make start-production
+          ls
+          make build-production
+          make start-production
