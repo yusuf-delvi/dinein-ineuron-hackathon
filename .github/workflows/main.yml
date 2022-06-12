@@ -19,7 +19,8 @@ jobs:
     steps:
       - uses: actions/checkout@master   
       - name: Build images
-        working-directory: docker/base
+        working-directory: /actions-runner/_work/dinein-ineuron-hackathon/dinein-ineuron-hackathon
         run: |
+          ls
           make build-production
           make start-production
